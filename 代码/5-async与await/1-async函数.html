@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>async函数</title>
+</head>
+
+<body>
+  <script>
+    async function main() {
+      return new Promise((resolve, reject) => {
+        // resolve('ok');
+        // reject('error');
+        throw "Oh no";
+      })
+    }
+    let result = main();
+
+    console.log(result);
+
+  </script>
+
+</body>
+
+</html>
