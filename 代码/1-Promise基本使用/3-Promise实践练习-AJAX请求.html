@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise 封装 AJAX</title>
+  <link rel="stylesheet" crossorigin="anonymous"
+    href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="page-header">封装 AJAX 操作</h2>
+    <button class="btn btn-primary" id="btn">点击发送 AJAX</button>
+  </div>
+  <script>
+    const btn = document.querySelector('#btn');
+    btn.addEventListener('click', function () {
+      //创建 Promise
+      const p = new Promise((resolve, reject) => {
+        // 1.创建对象
+        const xhr = new XMLHttpRequest();
+        //2.初始化
+        xhr.open('GET', 'https://v2.jokeapi.dev/joke/Any');
+        //3.发送
+        xhr.send()
+        //4.处理响应结果
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              resolve(xhr.response);
+            } else {
+              reject(xhr.status);
+            }
+          }
+        }
+      })
+      p.then(value => {
+        console.log(value);
+      }, reason => {
+        console.warn(reason);
+      })
+    })
+  </script>
+</body>
+
+</html>
